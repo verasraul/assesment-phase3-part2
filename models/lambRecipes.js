@@ -38,6 +38,6 @@ const LambRecipes = new Schema({
   },
 });
 
-const Recipe = mongoose.model("lambRecipes", LambRecipeSchema);
+const Recipe = mongoose.model("lambRecipes", LambRecipes);
 
 module.exports = Recipe;
