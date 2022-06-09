@@ -1,16 +1,47 @@
-const db = require("../db/index");
+const db = require("../db");
 const LambRecipe = require("../models/lambRecipes");
+const OriginCountry = require("../models/originCountry");
 
 db.on("error", console.error.bind(console, "MongoDB Connection Error!"));
 
 const main = async () => {
 
-  const lambRecipes = [
+  const originCountry = [{
+    name: "South Africa",
+    country_flag:
+      "https://upload.wikimedia.org/wikipedia/commons/a/af/Flag_of_South_Africa.svg",
+    moto: "ǃke e꞉ ǀxarra ǁke",
+},
+{
+    name: "Pakistan",
+    country_flag:
+      "https://upload.wikimedia.org/wikipedia/commons/3/32/Flag_of_Pakistan.svg",
+    moto: "ایمان، اتحاد، نظ",
+},
+{
+    name: "Japan",
+    country_flag:
+      "https://upload.wikimedia.org/wikipedia/en/9/9e/Flag_of_Japan.svg",
+   moto: " ",
+},
+{
+    name: "France",
+    country_flag:
+      "https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg",
+    moto: "Liberté, égalité, fraternité",
+},
+{
+    name: "Chile",
+    country_flag:
+      "https://upload.wikimedia.org/wikipedia/commons/7/78/Flag_of_Chile.svg",
+    moto: "Por la razón o la fuerzaé",
+}
+];
+
+    const lambRecipes = [
     {
       title: "Sosatie",
       origin_country: "South Africa",
-      country_flag:
-      "https://upload.wikimedia.org/wikipedia/commons/a/af/Flag_of_South_Africa.svg",
       ingredients: "lamb, onion, garlic, hot pepers, tamarind, curry leaves",
       picture:
         "https://cdn.tasteatlas.com/Images/Dishes/93b563510dab46f49d75667ee0544eda.jpg?w=905&h=510",
@@ -18,8 +49,6 @@ const main = async () => {
     {
       title: "Seekh kabab",
       origin_country: "Pakistan",
-      country_flag:
-      "https://upload.wikimedia.org/wikipedia/commons/3/32/Flag_of_Pakistan.svg",
       ingredients:
         "lamb, onion, garlic, ginger, coriander, lemon juice, yogurt, gram masala",
       picture:
@@ -28,8 +57,6 @@ const main = async () => {
     {
       title: "Jingisukan",
       origin_country: "Japan",
-      country_flag:
-      "https://upload.wikimedia.org/wikipedia/en/9/9e/Flag_of_Japan.svg",
       ingredients: "lamb, onion, cabage, leek, bell pepper",
       picture:
         "https://cdn.tasteatlas.com/images/dishes/fe57f72d1d5740429a8e5ecdd4ffdf6b.jpg?w=905&h=510",
@@ -37,8 +64,6 @@ const main = async () => {
     {
       title: "Navarin",
       origin_country: "France",
-      country_flag:
-      "https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg",
       ingredients:
         "lamb, onion, garlic, turnip, carrot tomato paste, white wine",
       picture:
@@ -47,15 +72,19 @@ const main = async () => {
     {
       title: "Cordero al palo",
       origin_country:  "Chile",
-      country_flag:
-      "https://upload.wikimedia.org/wikipedia/commons/7/78/Flag_of_Chile.svg",
       ingredients: "lamb, garlic, salt",
       picture:
         "https://cdn.tasteatlas.com/images/dishes/de71e275d3fb450a9a0ed107ef814105.jpg?w=905&h=510",
     },
   ];
+  await OriginCountry.insertMany(originCountry);
+  console.log("Created Origin Countries");
   await LambRecipe.insertMany(lambRecipes);
   console.log("Created many lamb recipes!");
+  // deletion test
+      // await LambRecipe.deleteMany();
+      // await OriginCountry.deleteMany();
+      // console.log("Deleted all recipes!");
 };
 
 const run = async () => {

@@ -9,19 +9,13 @@ const LambRecipes = new Schema({
     lowercase: true,
   },
 
-  origin_country: {
+  origin_country: [{
     type: String,
+    ref: "originCountry",
     required: false,
     trim: true,
     lowercase: true,
-  },
-
-  country_flag: {
-    type: String,
-    required: false,
-    trim: true,
-    lowercase: true,
-  },
+  }],
 
   ingredients: {
     type: String,
